@@ -1,0 +1,247 @@
+<!-- 推荐结果页 - AI购房推荐 - 专业版 UI -->
+<view class="result-container">
+  <!-- 加载中状态 -->
+  <view class="loading-section" wx:if="{{ loading }}">
+    <view class="loading-icon">🤖</view>
+    <view class="loading-text">{{ loadingText }}</view>
+    <view class="loading-sub">正在分析深圳房价数据...</view>
+    <view class="loading-progress">
+      <view class="loading-progress-bar"></view>
+    </view>
+    <view class="loading-steps">
+      <view class="loading-step {{ loadingStep >= 1 ? 'active' : '' }}">📊 分析您的购房需求</view>
+      <view class="loading-step {{ loadingStep >= 2 ? 'active' : '' }}">🔍 筛选匹配房源</view>
+      <view class="loading-step {{ loadingStep >= 3 ? 'active' : '' }}">✨ 生成智能推荐</view>
+    </view>
+  </view>
+
+  <!-- 结果内容 -->
+  <view class="result-content" wx:if="{{ !loading }}">
+    <!-- AI综合建议 -->
+    <view class="advice-card" wx:if="{{ advice }}">
+      <view class="advice-title">💡 AI购房建议</view>
+      <view class="advice-text">{{ advice }}</view>
+    </view>
+
+    <!-- TOP3推荐卡片 -->
+    <view class="compare-section" wx:if="{{ recommendations.length > 0 }}">
+      <view class="section-title">
+        <text>🏆 TOP {{ recommendations.length }} 推荐</text>
+        <text class="fallback-tag" wx:if="{{ isFallback }}">本地推荐</text>
+      </view>
+
+      <!-- TOP 卡片列表 - 双列布局 -->
+      <view class="top-cards-container">
+        <view class="top-card" wx:for="{{ recommendations }}" wx:key="id">
+        <!-- 排名徽章 -->
+        <view class="rank-badge {{ item.rank === 1 ? 'gold' : (item.rank === 2 ? 'silver' : 'bronze') }}">
+          {{ item.rank }}
+        </view>
+
+        <!-- 卡片头部 -->
+        <view class="top-card-header">
+          <!-- 图片占位区 -->
+          <view class="top-card-image">
+            <view class="top-card-image-placeholder"></view>
+          </view>
+
+          <!-- 信息区 -->
+          <view class="top-card-info">
+            <view class="top-card-title-row">
+              <view class="top-card-name">{{ item.name }}</view>
+              <view class="top-card-score">
+                <view class="top-card-score-value">{{ item.matchScore }}</view>
+                <view class="top-card-score-label">匹配度</view>
+              </view>
+            </view>
+            <view class="top-card-meta">
+              <view class="top-card-meta-item highlight">{{ item.currentAvgPrice }}元/㎡</view>
+              <view class="top-card-meta-item">{{ item.district }}</view>
+              <view class="top-card-meta-item">{{ item.avgArea }}㎡</view>
+            </view>
+            <!-- 价格对比信息 -->
+            <view class="top-card-price-info" wx:if="{{ item.filingPrice > 0 }}">
+              <view class="price-compare">
+                <text class="price-label">备案价:</text>
+                <text class="price-filing">{{ item.filingPrice }}元/㎡</text>
+                <text class="price-diff {{ item.priceDiff > 0 ? 'up' : 'down' }}" wx:if="{{ item.priceDiff !== 0 }}">
+                  {{ item.priceDiff > 0 ? '+' : '' }}{{ item.priceDiff }}元/㎡
+                </text>
+              </view>
+              <view class="price-date" wx:if="{{ item.priceDate }}">
+                <text class="price-date-text">{{ item.priceDate }}</text>
+              </view>
+            </view>
+            <view class="top-card-data-source" wx:if="{{ item.dataSource }}">
+              <text class="data-source-text">数据来源: {{ item.dataSource }}</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 推荐理由 -->
+        <view class="top-card-reasons" wx:if="{{ item.reasons && item.reasons.length > 0 }}">
+          <view class="reasons-title">🎯 推荐理由</view>
+          <view class="reasons-list">
+            <view class="reason-item" wx:for="{{ item.reasons }}" wx:for-item="reason" wx:key="*this">
+              <view class="reason-dot"></view>
+              <view class="reason-text">{{ reason }}</view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 优缺点标签 -->
+        <view class="top-card-tags" wx:if="{{ (item.pros && item.pros.length > 0) || (item.cons && item.cons.length > 0) }}">
+          <view class="pros-tags" wx:if="{{ item.pros && item.pros.length > 0 }}">
+            <view class="pros-tags-title">✅ 优点</view>
+            <view class="pros-tags-list">
+              <text class="tag-success" wx:for="{{ item.pros }}" wx:for-item="pro" wx:key="*this">{{ pro }}</text>
+            </view>
+          </view>
+          <view class="cons-tags" wx:if="{{ item.cons && item.cons.length > 0 }}">
+            <view class="cons-tags-title">⚠️ 缺点</view>
+            <view class="cons-tags-list">
+              <text class="tag-warning" wx:for="{{ item.cons }}" wx:for-item="con" wx:key="*this">{{ con }}</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 查看详情按钮 -->
+        <view class="top-card-action">
+          <button class="btn-detail" bindtap="onCommunityClick" data-id="{{ item.id }}">查看详情</button>
+        </view>
+        </view>
+      </view>
+
+      <!-- 对比表格 -->
+      <view class="compare-table">
+        <!-- 表头 -->
+        <view class="table-header">
+          <view class="th-cell th-label">对比项</view>
+          <view class="th-cell" wx:for="{{ recommendations }}" wx:key="id">
+            <view class="th-rank">#{{ item.rank }}</view>
+            <view class="th-name">{{ item.name }}</view>
+          </view>
+        </view>
+
+        <!-- 最新成交价 -->
+        <view class="table-row">
+          <view class="td-label">最新成交价</view>
+          <view class="td-cell" wx:for="{{ recommendations }}" wx:key="id">
+            <text class="td-price">{{ item.currentAvgPrice }}元/㎡</text>
+            <text class="td-price-date" wx:if="{{ item.priceDate }}">({{ item.priceDate }})</text>
+          </view>
+        </view>
+
+        <!-- 备案价 -->
+        <view class="table-row" wx:if="{{ recommendations[0].filingPrice > 0 }}">
+          <view class="td-label">备案价</view>
+          <view class="td-cell" wx:for="{{ recommendations }}" wx:key="id">
+            <text class="td-filing-price">{{ item.filingPrice }}元/㎡</text>
+          </view>
+        </view>
+
+        <!-- 价差 -->
+        <view class="table-row" wx:if="{{ recommendations[0].filingPrice > 0 }}">
+          <view class="td-label">价差</view>
+          <view class="td-cell" wx:for="{{ recommendations }}" wx:key="id">
+            <text class="td-price-diff {{ item.priceDiff > 0 ? 'up' : 'down' }}">
+              {{ item.priceDiff > 0 ? '+' : '' }}{{ item.priceDiff }}元/㎡
+            </text>
+          </view>
+        </view>
+
+        <!-- 区域 -->
+        <view class="table-row">
+          <view class="td-label">区域</view>
+          <view class="td-cell" wx:for="{{ recommendations }}" wx:key="id">
+            <text>{{ item.district }}</text>
+          </view>
+        </view>
+
+        <!-- 户型 -->
+        <view class="table-row">
+          <view class="td-label">户型</view>
+          <view class="td-cell" wx:for="{{ recommendations }}" wx:key="id">
+            <text>{{ item.layoutTypesStr }}</text>
+          </view>
+        </view>
+
+        <!-- 面积 -->
+        <view class="table-row">
+          <view class="td-label">平均面积</view>
+          <view class="td-cell" wx:for="{{ recommendations }}" wx:key="id">
+            <text>{{ item.avgArea }}㎡</text>
+          </view>
+        </view>
+
+        <!-- 楼龄 -->
+        <view class="table-row">
+          <view class="td-label">建成年份</view>
+          <view class="td-cell" wx:for="{{ recommendations }}" wx:key="id">
+            <text>{{ item.buildYear }}年</text>
+          </view>
+        </view>
+
+        <!-- 配套 -->
+        <view class="table-row">
+          <view class="td-label">地铁距离</view>
+          <view class="td-cell" wx:for="{{ recommendations }}" wx:key="id">
+            <text>{{ item.metroDistance }}m</text>
+          </view>
+        </view>
+
+        <!-- 匹配度 -->
+        <view class="table-row">
+          <view class="td-label">匹配度</view>
+          <view class="td-cell" wx:for="{{ recommendations }}" wx:key="id">
+            <text class="td-score">{{ item.matchScore }}分</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 兼容旧版：详细推荐（保留以兼容现有数据） -->
+      <view class="detail-section" wx:for="{{ recommendations }}" wx:key="id" wx:if="{{ false }}">
+        <view class="detail-header">
+          <view class="detail-rank">{{ item.rank }}</view>
+          <view class="detail-name">{{ item.name }}</view>
+          <view class="detail-score">{{ item.matchScore }}分</view>
+        </view>
+
+        <view class="detail-reasons">
+          <view class="reason-item" wx:for="{{ item.reasons }}" wx:for-item="reason" wx:key="*this">
+            <text class="reason-dot">•</text>
+            <text class="reason-text">{{ reason }}</text>
+          </view>
+        </view>
+
+        <view class="detail-pros-cons">
+          <view class="pros" wx:if="{{ item.pros.length > 0 }}">
+            <view class="pros-title">✅ 优点</view>
+            <text wx:for="{{ item.pros }}" wx:for-item="pro" wx:key="*this">{{ pro }}</text>
+          </view>
+          <view class="cons" wx:if="{{ item.cons.length > 0 }}">
+            <view class="cons-title">⚠️ 缺点</view>
+            <text wx:for="{{ item.cons }}" wx:for-item="con" wx:key="*this">{{ con }}</text>
+          </view>
+        </view>
+
+        <view class="detail-actions">
+          <button class="btn-detail" bindtap="onCommunityClick" data-id="{{ item.id }}">查看详情</button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{ recommendations.length === 0 }}">
+      <view class="empty-icon">😔</view>
+      <view class="empty-text">{{ advice }}</view>
+      <button class="empty-btn" bindtap="onReMatch">重新咨询</button>
+    </view>
+
+    <!-- 底部操作 -->
+    <view class="footer-actions" wx:if="{{ recommendations.length > 0 }}">
+      <button class="btn-rematch" bindtap="onReMatch">🔄 重新咨询</button>
+      <button class="btn-share" open-type="share">📤 分享结果</button>
+    </view>
+  </view>
+</view>

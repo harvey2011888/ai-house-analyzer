@@ -1,0 +1,289 @@
+/**
+ * 价格数据模块
+ * 将 prices.json 转换为 JS 模块，以便微信小程序可以 require 加载
+ */
+
+module.exports = {
+  prices: [
+    {
+      community_id: "c001",
+      current_avg_price: 142000,
+      price_history: [
+        {month: "2025-11", avg_price: 138000},
+        {month: "2025-12", avg_price: 139500},
+        {month: "2026-01", avg_price: 140000},
+        {month: "2026-02", avg_price: 140500},
+        {month: "2026-03", avg_price: 141200},
+        {month: "2026-04", avg_price: 141800}
+      ],
+      yoy_change: 5.2,
+      mom_change: 0.4
+    },
+    {
+      community_id: "c002",
+      current_avg_price: 115000,
+      price_history: [
+        {month: "2025-11", avg_price: 112000},
+        {month: "2025-12", avg_price: 113000},
+        {month: "2026-01", avg_price: 113500},
+        {month: "2026-02", avg_price: 114000},
+        {month: "2026-03", avg_price: 114500},
+        {month: "2026-04", avg_price: 114800}
+      ],
+      yoy_change: 4.8,
+      mom_change: 0.3
+    },
+    {
+      community_id: "c003",
+      current_avg_price: 108000,
+      price_history: [
+        {month: "2025-11", avg_price: 105000},
+        {month: "2025-12", avg_price: 106000},
+        {month: "2026-01", avg_price: 106500},
+        {month: "2026-02", avg_price: 107000},
+        {month: "2026-03", avg_price: 107500},
+        {month: "2026-04", avg_price: 107800}
+      ],
+      yoy_change: 3.5,
+      mom_change: 0.3
+    },
+    {
+      community_id: "c004",
+      current_avg_price: 95000,
+      price_history: [
+        {month: "2025-11", avg_price: 93000},
+        {month: "2025-12", avg_price: 93800},
+        {month: "2026-01", avg_price: 94200},
+        {month: "2026-02", avg_price: 94500},
+        {month: "2026-03", avg_price: 94800},
+        {month: "2026-04", avg_price: 95200}
+      ],
+      yoy_change: 2.8,
+      mom_change: 0.4
+    },
+    {
+      community_id: "c005",
+      current_avg_price: 128000,
+      price_history: [
+        {month: "2025-11", avg_price: 124000},
+        {month: "2025-12", avg_price: 125000},
+        {month: "2026-01", avg_price: 125800},
+        {month: "2026-02", avg_price: 126500},
+        {month: "2026-03", avg_price: 127200},
+        {month: "2026-04", avg_price: 127800}
+      ],
+      yoy_change: 6.1,
+      mom_change: 0.5
+    },
+    {
+      community_id: "c006",
+      current_avg_price: 135000,
+      price_history: [
+        {month: "2025-11", avg_price: 130000},
+        {month: "2025-12", avg_price: 131500},
+        {month: "2026-01", avg_price: 132500},
+        {month: "2026-02", avg_price: 133500},
+        {month: "2026-03", avg_price: 134200},
+        {month: "2026-04", avg_price: 134800}
+      ],
+      yoy_change: 7.2,
+      mom_change: 0.4
+    },
+    {
+      community_id: "c007",
+      current_avg_price: 118000,
+      price_history: [
+        {month: "2025-11", avg_price: 114000},
+        {month: "2025-12", avg_price: 115000},
+        {month: "2026-01", avg_price: 115800},
+        {month: "2026-02", avg_price: 116500},
+        {month: "2026-03", avg_price: 117200},
+        {month: "2026-04", avg_price: 117800}
+      ],
+      yoy_change: 5.5,
+      mom_change: 0.5
+    },
+    {
+      community_id: "c008",
+      current_avg_price: 105000,
+      price_history: [
+        {month: "2025-11", avg_price: 102000},
+        {month: "2025-12", avg_price: 103000},
+        {month: "2026-01", avg_price: 103500},
+        {month: "2026-02", avg_price: 104000},
+        {month: "2026-03", avg_price: 104500},
+        {month: "2026-04", avg_price: 104800}
+      ],
+      yoy_change: 3.8,
+      mom_change: 0.3
+    },
+    {
+      community_id: "c009",
+      current_avg_price: 72000,
+      price_history: [
+        {month: "2025-11", avg_price: 70000},
+        {month: "2025-12", avg_price: 70800},
+        {month: "2026-01", avg_price: 71200},
+        {month: "2026-02", avg_price: 71500},
+        {month: "2026-03", avg_price: 71800},
+        {month: "2026-04", avg_price: 72000}
+      ],
+      yoy_change: 1.5,
+      mom_change: 0.3
+    },
+    {
+      community_id: "c010",
+      current_avg_price: 78000,
+      price_history: [
+        {month: "2025-11", avg_price: 76000},
+        {month: "2025-12", avg_price: 76800},
+        {month: "2026-01", avg_price: 77200},
+        {month: "2026-02", avg_price: 77500},
+        {month: "2026-03", avg_price: 77800},
+        {month: "2026-04", avg_price: 78000}
+      ],
+      yoy_change: 2.2,
+      mom_change: 0.3
+    },
+    {
+      community_id: "c011",
+      current_avg_price: 65000,
+      price_history: [
+        {month: "2025-11", avg_price: 63500},
+        {month: "2025-12", avg_price: 64000},
+        {month: "2026-01", avg_price: 64300},
+        {month: "2026-02", avg_price: 64500},
+        {month: "2026-03", avg_price: 64800},
+        {month: "2026-04", avg_price: 65000}
+      ],
+      yoy_change: 1.2,
+      mom_change: 0.3
+    },
+    {
+      community_id: "c012",
+      current_avg_price: 98000,
+      price_history: [
+        {month: "2025-11", avg_price: 95000},
+        {month: "2025-12", avg_price: 96000},
+        {month: "2026-01", avg_price: 96500},
+        {month: "2026-02", avg_price: 97000},
+        {month: "2026-03", avg_price: 97500},
+        {month: "2026-04", avg_price: 97800}
+      ],
+      yoy_change: 4.5,
+      mom_change: 0.3
+    },
+    {
+      community_id: "c013",
+      current_avg_price: 58000,
+      price_history: [
+        {month: "2025-11", avg_price: 56500},
+        {month: "2025-12", avg_price: 57000},
+        {month: "2026-01", avg_price: 57300},
+        {month: "2026-02", avg_price: 57500},
+        {month: "2026-03", avg_price: 57800},
+        {month: "2026-04", avg_price: 58000}
+      ],
+      yoy_change: 1.8,
+      mom_change: 0.3
+    },
+    {
+      community_id: "c014",
+      current_avg_price: 72000,
+      price_history: [
+        {month: "2025-11", avg_price: 70000},
+        {month: "2025-12", avg_price: 70800},
+        {month: "2026-01", avg_price: 71200},
+        {month: "2026-02", avg_price: 71500},
+        {month: "2026-03", avg_price: 71800},
+        {month: "2026-04", avg_price: 72000}
+      ],
+      yoy_change: 2.5,
+      mom_change: 0.3
+    },
+    {
+      community_id: "c015",
+      current_avg_price: 52000,
+      price_history: [
+        {month: "2025-11", avg_price: 50500},
+        {month: "2025-12", avg_price: 51000},
+        {month: "2026-01", avg_price: 51300},
+        {month: "2026-02", avg_price: 51500},
+        {month: "2026-03", avg_price: 51800},
+        {month: "2026-04", avg_price: 52000}
+      ],
+      yoy_change: 1.0,
+      mom_change: 0.4
+    },
+    {
+      community_id: "c016",
+      current_avg_price: 55000,
+      price_history: [
+        {month: "2025-11", avg_price: 53500},
+        {month: "2025-12", avg_price: 54000},
+        {month: "2026-01", avg_price: 54300},
+        {month: "2026-02", avg_price: 54500},
+        {month: "2026-03", avg_price: 54800},
+        {month: "2026-04", avg_price: 55000}
+      ],
+      yoy_change: 1.5,
+      mom_change: 0.4
+    },
+    {
+      community_id: "c017",
+      current_avg_price: 48000,
+      price_history: [
+        {month: "2025-11", avg_price: 46500},
+        {month: "2025-12", avg_price: 47000},
+        {month: "2026-01", avg_price: 47300},
+        {month: "2026-02", avg_price: 47500},
+        {month: "2026-03", avg_price: 47800},
+        {month: "2026-04", avg_price: 48000}
+      ],
+      yoy_change: 0.8,
+      mom_change: 0.4
+    },
+    {
+      community_id: "c018",
+      current_avg_price: 68000,
+      price_history: [
+        {month: "2025-11", avg_price: 66000},
+        {month: "2025-12", avg_price: 66500},
+        {month: "2026-01", avg_price: 66800},
+        {month: "2026-02", avg_price: 67200},
+        {month: "2026-03", avg_price: 67500},
+        {month: "2026-04", avg_price: 67800}
+      ],
+      yoy_change: 3.2,
+      mom_change: 0.4
+    },
+    {
+      community_id: "c019",
+      current_avg_price: 62000,
+      price_history: [
+        {month: "2025-11", avg_price: 60000},
+        {month: "2025-12", avg_price: 60500},
+        {month: "2026-01", avg_price: 61000},
+        {month: "2026-02", avg_price: 61300},
+        {month: "2026-03", avg_price: 61600},
+        {month: "2026-04", avg_price: 61800}
+      ],
+      yoy_change: 2.8,
+      mom_change: 0.3
+    },
+    {
+      community_id: "c020",
+      current_avg_price: 85000,
+      price_history: [
+        {month: "2025-11", avg_price: 83000},
+        {month: "2025-12", avg_price: 83500},
+        {month: "2026-01", avg_price: 84000},
+        {month: "2026-02", avg_price: 84300},
+        {month: "2026-03", avg_price: 84600},
+        {month: "2026-04", avg_price: 84800}
+      ],
+      yoy_change: 2.0,
+      mom_change: 0.2
+    }
+  ]
+};

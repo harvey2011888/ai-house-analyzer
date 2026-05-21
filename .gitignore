@@ -1,0 +1,55 @@
+# 依赖
+node_modules/
+
+# 小程序 npm 构建产物（通过 npm install + 构建工具生成）
+miniprogram_npm/
+
+# 配置文件（包含 API Key，不提交）
+config/config.js
+
+# 爬取的数据（含 cookies/session 等敏感信息）
+data/crawled/
+
+# 微信小程序私有配置
+project.private.config.json
+
+# 调试/测试文件
+*.debug*.html
+test-page.html
+blocked-page.html
+
+# 脚本生成的临时数据文件
+data/*.json
+data/*.json.js
+# 保留这些需要的 JS 数据文件
+!data/ai-prompts.json
+!data/consultation-records.json
+!data/user-simulations.json
+!data/facilities.json
+!data/system-prompt.md
+!data/communities-data.js
+!data/communities.json.js
+!data/districts-data.js
+!data/districts.js
+!data/districts.json
+!data/meta-data.js
+!data/meta.json
+!data/preloaded-data.js
+!data/prices-data.js
+!data/prices.json
+!data/second_hand_house_raw.json
+!data/transactions-data.js
+!data/transactions.json
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+
+# IDE 配置
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 日志
+*.log

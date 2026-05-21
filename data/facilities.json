@@ -1,0 +1,324 @@
+{
+  "facilities": [
+    {
+      "community_id": "c001",
+      "metro": {"name": "香蜜湖站", "distance": 800, "line": "1号线"},
+      "schools": [
+        {"name": "福田外国语学校", "type": "初中", "distance": 500},
+        {"name": "荔园小学", "type": "小学", "distance": 600}
+      ],
+      "hospitals": [
+        {"name": "北京大学深圳医院", "distance": 1200},
+        {"name": "深圳市儿童医院", "distance": 1500}
+      ],
+      "malls": [
+        {"name": "山姆会员店", "distance": 700},
+        {"name": "东海城市广场", "distance": 900}
+      ]
+    },
+    {
+      "community_id": "c002",
+      "metro": {"name": "购物公园站", "distance": 400, "line": "1号线/3号线"},
+      "schools": [
+        {"name": "福田中学", "type": "高中", "distance": 800},
+        {"name": "石厦学校", "type": "九年一贯制", "distance": 600}
+      ],
+      "hospitals": [
+        {"name": "深圳市妇幼保健院", "distance": 1000},
+        {"name": "中山大学附属第八医院", "distance": 1200}
+      ],
+      "malls": [
+        {"name": "COCO Park", "distance": 300},
+        {"name": "皇庭广场", "distance": 500}
+      ]
+    },
+    {
+      "community_id": "c003",
+      "metro": {"name": "少年宫站", "distance": 600, "line": "3号线/4号线"},
+      "schools": [
+        {"name": "莲花中学", "type": "初中", "distance": 400},
+        {"name": "天健小学", "type": "小学", "distance": 300}
+      ],
+      "hospitals": [
+        {"name": "深圳市第二人民医院", "distance": 1500},
+        {"name": "福田区妇幼保健院", "distance": 800}
+      ],
+      "malls": [
+        {"name": "中心城广场", "distance": 500},
+        {"name": "卓悦中心", "distance": 700}
+      ]
+    },
+    {
+      "community_id": "c004",
+      "metro": {"name": "车公庙站", "distance": 500, "line": "1号线/7号线/9号线/11号线"},
+      "schools": [
+        {"name": "深圳高级中学", "type": "高中", "distance": 700},
+        {"name": "东海实验小学", "type": "小学", "distance": 400}
+      ],
+      "hospitals": [
+        {"name": "香港大学深圳医院", "distance": 2000},
+        {"name": "香蜜湖医院", "distance": 600}
+      ],
+      "malls": [
+        {"name": "东海缤纷天地", "distance": 300},
+        {"name": "印力中心", "distance": 800}
+      ]
+    },
+    {
+      "community_id": "c005",
+      "metro": {"name": "高新园站", "distance": 300, "line": "1号线"},
+      "schools": [
+        {"name": "南山外国语学校", "type": "九年一贯制", "distance": 500},
+        {"name": "大冲学校", "type": "九年一贯制", "distance": 400}
+      ],
+      "hospitals": [
+        {"name": "深圳大学总医院", "distance": 1800},
+        {"name": "南山区人民医院", "distance": 1200}
+      ],
+      "malls": [
+        {"name": "万象天地", "distance": 200},
+        {"name": "益田假日广场", "distance": 1000}
+      ]
+    },
+    {
+      "community_id": "c006",
+      "metro": {"name": "东角头站", "distance": 900, "line": "2号线"},
+      "schools": [
+        {"name": "育才中学", "type": "高中", "distance": 700},
+        {"name": "半岛城邦学校", "type": "九年一贯制", "distance": 300}
+      ],
+      "hospitals": [
+        {"name": "蛇口人民医院", "distance": 1200},
+        {"name": "南山区妇幼保健院", "distance": 1500}
+      ],
+      "malls": [
+        {"name": "海上世界", "distance": 1500},
+        {"name": "花园城", "distance": 1200}
+      ]
+    },
+    {
+      "community_id": "c007",
+      "metro": {"name": "海月站", "distance": 200, "line": "2号线"},
+      "schools": [
+        {"name": "育才三中", "type": "初中", "distance": 500},
+        {"name": "后海小学", "type": "小学", "distance": 400}
+      ],
+      "hospitals": [
+        {"name": "蛇口人民医院", "distance": 1000},
+        {"name": "南山区慢性病防治院", "distance": 800}
+      ],
+      "malls": [
+        {"name": "宝能太古城购物中心", "distance": 100},
+        {"name": "海岸城", "distance": 800}
+      ]
+    },
+    {
+      "community_id": "c008",
+      "metro": {"name": "登良站", "distance": 500, "line": "2号线"},
+      "schools": [
+        {"name": "北师大南山附属学校", "type": "九年一贯制", "distance": 600},
+        {"name": "蔚蓝海岸幼儿园", "type": "幼儿园", "distance": 200}
+      ],
+      "hospitals": [
+        {"name": "南山区人民医院", "distance": 1500},
+        {"name": "蛇口人民医院", "distance": 1200}
+      ],
+      "malls": [
+        {"name": "海岸城", "distance": 600},
+        {"name": "保利文化广场", "distance": 800}
+      ]
+    },
+    {
+      "community_id": "c009",
+      "metro": {"name": "太安站", "distance": 400, "line": "5号线/7号线"},
+      "schools": [
+        {"name": "东湖中学", "type": "初中", "distance": 500},
+        {"name": "百仕达小学", "type": "小学", "distance": 300}
+      ],
+      "hospitals": [
+        {"name": "深圳市人民医院", "distance": 1200},
+        {"name": "罗湖区妇幼保健院", "distance": 800}
+      ],
+      "malls": [
+        {"name": "喜荟城", "distance": 400},
+        {"name": "天河城", "distance": 600}
+      ]
+    },
+    {
+      "community_id": "c010",
+      "metro": {"name": "黄贝岭站", "distance": 600, "line": "2号线/5号线"},
+      "schools": [
+        {"name": "翠园中学", "type": "高中", "distance": 800},
+        {"name": "螺岭外国语实验学校", "type": "小学", "distance": 500}
+      ],
+      "hospitals": [
+        {"name": "深圳市人民医院", "distance": 1000},
+        {"name": "罗湖区中医院", "distance": 700}
+      ],
+      "malls": [
+        {"name": "深业东岭", "distance": 300},
+        {"name": "京基凤凰印象", "distance": 500}
+      ]
+    },
+    {
+      "community_id": "c011",
+      "metro": {"name": "翠竹站", "distance": 300, "line": "3号线"},
+      "schools": [
+        {"name": "翠竹中学", "type": "初中", "distance": 400},
+        {"name": "翠竹小学", "type": "小学", "distance": 200}
+      ],
+      "hospitals": [
+        {"name": "深圳市人民医院", "distance": 500},
+        {"name": "康宁医院", "distance": 800}
+      ],
+      "malls": [
+        {"name": "翠竹沃尔玛", "distance": 400},
+        {"name": "华润万家", "distance": 300}
+      ]
+    },
+    {
+      "community_id": "c012",
+      "metro": {"name": "宝安中心站", "distance": 200, "line": "1号线/5号线"},
+      "schools": [
+        {"name": "宝安中学", "type": "高中", "distance": 600},
+        {"name": "海旺学校", "type": "九年一贯制", "distance": 400}
+      ],
+      "hospitals": [
+        {"name": "宝安区人民医院", "distance": 1000},
+        {"name": "南方医科大学深圳医院", "distance": 1200}
+      ],
+      "malls": [
+        {"name": "壹方城", "distance": 100},
+        {"name": "前海HOP天地", "distance": 500}
+      ]
+    },
+    {
+      "community_id": "c013",
+      "metro": {"name": "西乡桃源站", "distance": 800, "line": "12号线"},
+      "schools": [
+        {"name": "西乡中学", "type": "高中", "distance": 600},
+        {"name": "桃源居学校", "type": "九年一贯制", "distance": 300}
+      ],
+      "hospitals": [
+        {"name": "宝安区中心医院", "distance": 1000},
+        {"name": "西乡人民医院", "distance": 800}
+      ],
+      "malls": [
+        {"name": "人人乐", "distance": 500},
+        {"name": "天虹商场", "distance": 700}
+      ]
+    },
+    {
+      "community_id": "c014",
+      "metro": {"name": "宝安中心站", "distance": 500, "line": "1号线/5号线"},
+      "schools": [
+        {"name": "新安中学", "type": "高中", "distance": 700},
+        {"name": "滨海小学", "type": "小学", "distance": 400}
+      ],
+      "hospitals": [
+        {"name": "宝安区人民医院", "distance": 800},
+        {"name": "宝安妇幼保健院", "distance": 600}
+      ],
+      "malls": [
+        {"name": "壹方城", "distance": 600},
+        {"name": "欢乐港湾", "distance": 1000}
+      ]
+    },
+    {
+      "community_id": "c015",
+      "metro": {"name": "坂田站", "distance": 600, "line": "5号线"},
+      "schools": [
+        {"name": "万科城实验学校", "type": "九年一贯制", "distance": 300},
+        {"name": "深圳科学高中", "type": "高中", "distance": 500}
+      ],
+      "hospitals": [
+        {"name": "龙岗区第二人民医院", "distance": 1000},
+        {"name": "坂田医院", "distance": 700}
+      ],
+      "malls": [
+        {"name": "万科城商业街", "distance": 200},
+        {"name": "天虹商场坂田店", "distance": 800}
+      ]
+    },
+    {
+      "community_id": "c016",
+      "metro": {"name": "岗头站", "distance": 400, "line": "10号线"},
+      "schools": [
+        {"name": "坂田小学", "type": "小学", "distance": 500},
+        {"name": "科技城外国语学校", "type": "九年一贯制", "distance": 300}
+      ],
+      "hospitals": [
+        {"name": "龙岗区第二人民医院", "distance": 800},
+        {"name": "坂田医院", "distance": 600}
+      ],
+      "malls": [
+        {"name": "佳兆业城市广场购物中心", "distance": 100},
+        {"name": "天安云谷", "distance": 500}
+      ]
+    },
+    {
+      "community_id": "c017",
+      "metro": {"name": "大运站", "distance": 500, "line": "3号线/14号线/16号线"},
+      "schools": [
+        {"name": "大运城邦学校", "type": "九年一贯制", "distance": 400},
+        {"name": "深圳信息职业技术学院", "type": "大学", "distance": 800}
+      ],
+      "hospitals": [
+        {"name": "北京中医药大学深圳医院", "distance": 1000},
+        {"name": "龙岗区人民医院", "distance": 1500}
+      ],
+      "malls": [
+        {"name": "COCO Park龙岗", "distance": 600},
+        {"name": "山姆会员店龙岗", "distance": 800}
+      ]
+    },
+    {
+      "community_id": "c018",
+      "metro": {"name": "龙华站", "distance": 300, "line": "4号线"},
+      "schools": [
+        {"name": "龙华中学", "type": "高中", "distance": 500},
+        {"name": "龙华中心小学", "type": "小学", "distance": 400}
+      ],
+      "hospitals": [
+        {"name": "龙华区人民医院", "distance": 800},
+        {"name": "深圳市人民医院龙华分院", "distance": 1000}
+      ],
+      "malls": [
+        {"name": "壹方天地", "distance": 200},
+        {"name": "龙华九方", "distance": 600}
+      ]
+    },
+    {
+      "community_id": "c019",
+      "metro": {"name": "红山站", "distance": 150, "line": "4号线/6号线"},
+      "schools": [
+        {"name": "红山学校", "type": "九年一贯制", "distance": 300},
+        {"name": "深圳高级中学北校区", "type": "高中", "distance": 500}
+      ],
+      "hospitals": [
+        {"name": "龙华区人民医院", "distance": 1000},
+        {"name": "新华医院", "distance": 600}
+      ],
+      "malls": [
+        {"name": "红山6979商业中心", "distance": 50},
+        {"name": "龙光玖钻", "distance": 300}
+      ]
+    },
+    {
+      "community_id": "c020",
+      "metro": {"name": "观澜湖站", "distance": 500, "line": "4号线"},
+      "schools": [
+        {"name": "观澜中学", "type": "高中", "distance": 800},
+        {"name": "观澜湖国际学校", "type": "国际学校", "distance": 300}
+      ],
+      "hospitals": [
+        {"name": "龙华区中心医院", "distance": 1200},
+        {"name": "观澜人民医院", "distance": 800}
+      ],
+      "malls": [
+        {"name": "观澜湖新城MH MALL", "distance": 400},
+        {"name": "观澜湖高尔夫会所", "distance": 200}
+      ]
+    }
+  ]
+}

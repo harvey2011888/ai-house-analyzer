@@ -1,0 +1,123 @@
+<!-- 首页 - 专业版 -->
+<view class="home-container">
+  <!-- 顶部欢迎区域 - 渐变背景 -->
+  <view class="welcome-section">
+    <!-- 数据可信度标签 -->
+    <view class="welcome-badge">
+      <view class="badge-icon">✓</view>
+      <text class="badge-text">基于真实成交数据</text>
+    </view>
+    
+    <!-- 品牌标识区域 - 大字号标题 -->
+    <view class="brand-section">
+      <view class="brand-title">AI购房助手</view>
+      <view class="brand-subtitle">专业的深圳购房智能推荐</view>
+    </view>
+    
+    <!-- 描述文字 -->
+    <view class="welcome-desc">
+      <text class="desc-line">基于AI大模型，结合深圳真实房价数据</text>
+      <text class="desc-line">为您推荐最合适的小区</text>
+    </view>
+  </view>
+
+  <!-- 开始咨询按钮 - 渐变色彩 + 阴影 + 点击动画 -->
+  <view class="start-section">
+    <button class="start-btn" bindtap="onStartChat" hover-class="start-btn-hover">
+      <view class="btn-icon">💬</view>
+      <view class="btn-content">
+        <text class="btn-text">开始咨询</text>
+        <text class="btn-subtext">AI为您推荐最适合的房源</text>
+      </view>
+      <view class="btn-arrow">→</view>
+    </button>
+  </view>
+
+  <!-- 热门小区预览 - 已注释：数据加载问题 -->
+  <!--
+  <view class="hot-section">
+    <view class="section-header">
+      <view class="section-title">
+        <text class="title-icon">🔥</text>
+        <text class="title-text">热门小区</text>
+      </view>
+      <text class="title-sub">本周关注最多</text>
+    </view>
+
+    <view class="hot-list">
+      <view class="hot-item"
+            wx:for="{{ hotCommunities }}"
+            wx:key="id"
+            bindtap="onCommunityClick"
+            data-id="{{ item.id }}"
+            hover-class="hot-item-hover">
+        <view class="hot-image-wrapper">
+          <view class="hot-image-placeholder" style="background: linear-gradient(135deg, {{ item.gradientStart || '#667eea' }} 0%, {{ item.gradientEnd || '#764ba2' }} 100%);">
+            <text class="placeholder-text">{{ item.name[0] }}</text>
+          </view>
+          <view class="hot-image-mask"></view>
+          <view class="hot-rank">{{ index + 1 }}</view>
+        </view>
+        <view class="hot-content">
+          <view class="hot-header">
+            <view class="hot-name">{{ item.name }}</view>
+            <view class="hot-trend {{ item.trendType }}">{{ item.trend }}</view>
+          </view>
+          <view class="hot-info">
+            <view class="hot-district-tag">
+              <text class="district-icon">📍</text>
+              <text class="district-text">{{ item.district }}</text>
+            </view>
+            <view class="hot-price-wrapper">
+              <text class="hot-price">{{ item.price }}</text>
+              <text class="hot-unit">元/㎡</text>
+            </view>
+          </view>
+          <view class="hot-tags">
+            <text class="hot-tag" wx:for="{{ item.tags }}" wx:key="*this" wx:for-item="tag">{{ tag }}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  -->
+
+  <!-- 产品特点区域 -->
+  <view class="trust-section">
+    <view class="trust-header">
+      <view class="trust-badge">
+        <view class="trust-badge-icon">🛡️</view>
+        <text class="trust-badge-text">产品特点</text>
+      </view>
+    </view>
+    <view class="trust-list">
+      <view class="trust-item">
+        <view class="trust-icon trust-data">🤖</view>
+        <view class="trust-content">
+          <text class="trust-title">多AI讨论</text>
+          <text class="trust-desc">多AI专家深度讨论</text>
+        </view>
+      </view>
+      <view class="trust-item">
+        <view class="trust-icon trust-ai">🎯</view>
+        <view class="trust-content">
+          <text class="trust-title">精准需求匹配</text>
+          <text class="trust-desc">8维度深度分析您的需求</text>
+        </view>
+      </view>
+      <view class="trust-item">
+        <view class="trust-icon trust-update">📍</view>
+        <view class="trust-content">
+          <text class="trust-title">全深圳覆盖</text>
+          <text class="trust-desc">涵盖10大区域真实小区</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部提示 -->
+  <view class="footer-tip">
+    <view class="footer-icon">💡</view>
+    <text class="footer-text">已有 <text class="footer-highlight">1000+</text> 用户通过AI找到理想房源</text>
+  </view>
+</view>

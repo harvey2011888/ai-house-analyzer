@@ -1,0 +1,207 @@
+<!-- 小区详情页 - 专业版UI -->
+<view class="container">
+  <!-- 加载状态 -->
+  <view class="loading-container" wx:if="{{ loading }}">
+    <view class="loading-text">加载中...</view>
+  </view>
+
+  <!-- 小区内容（加载完成后显示） -->
+  <block wx:if="{{ !loading && community.id }}">
+    <!-- 顶部信息卡片 - 带渐变背景 -->
+    <view class="header-card">
+      <!-- 渐变背景装饰 -->
+      <view class="header-gradient-bg"></view>
+      
+      <!-- 小区名称和区域标签 -->
+      <view class="community-header">
+        <text class="community-name">{{ community.name }}</text>
+        <view class="tag tag-primary district-tag">{{ community.district }}</view>
+      </view>
+
+      <!-- 地址 -->
+      <view class="address-row" bindtap="onViewMap">
+        <text class="address-icon">📍</text>
+        <text class="address-text">{{ community.address }}</text>
+        <text class="arrow-icon">›</text>
+      </view>
+
+      <!-- 当前均价 - 突出显示 -->
+      <view class="price-highlight" wx:if="{{ price.current_avg_price }}">
+        <text class="price-label">当前均价</text>
+        <view class="price-display">
+          <text class="price-number text-danger">{{ price.current_avg_price }}</text>
+          <text class="price-unit">元/㎡</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 基本信息网格 - 2x2布局，图标+文字 -->
+    <view class="info-card card">
+      <view class="section-title">基本信息</view>
+      <view class="info-grid">
+        <view class="grid-item">
+          <view class="grid-icon icon-calendar">📅</view>
+          <view class="grid-content">
+            <text class="grid-label">建造年份</text>
+            <text class="grid-value">{{ community.build_year }}年</text>
+            <text class="grid-sub" wx:if="{{ community.build_year }}">楼龄{{ currentYear - community.build_year }}年</text>
+          </view>
+        </view>
+        <view class="grid-item">
+          <view class="grid-icon icon-home">🏠</view>
+          <view class="grid-content">
+            <text class="grid-label">总户数</text>
+            <text class="grid-value">{{ community.total_households }}户</text>
+          </view>
+        </view>
+        <view class="grid-item">
+          <view class="grid-icon icon-building">🏢</view>
+          <view class="grid-content">
+            <text class="grid-label">物业类型</text>
+            <text class="grid-value">{{ community.property_type }}</text>
+          </view>
+        </view>
+        <view class="grid-item">
+          <view class="grid-icon icon-area">📐</view>
+          <view class="grid-content">
+            <text class="grid-label">平均面积</text>
+            <text class="grid-value">{{ community.avg_area }}㎡</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 价格信息卡片 -->
+    <view class="price-card card" wx:if="{{ price.current_avg_price }}">
+      <view class="section-title">价格分析</view>
+
+      <!-- 总价估算 -->
+      <view class="total-price-row">
+        <text class="total-label">总价估算约</text>
+        <text class="total-value">{{ totalPrice }} 万元</text>
+      </view>
+
+      <!-- 同比/环比变化 -->
+      <view class="change-row">
+        <view class="change-item">
+          <text class="change-label">同比去年</text>
+          <view class="change-tag {{ price.yoy_change > 0 ? 'tag-up' : (price.yoy_change < 0 ? 'tag-down' : 'tag-flat') }}">
+            <text class="change-arrow">{{ price.yoy_change > 0 ? '↑' : (price.yoy_change < 0 ? '↓' : '-') }}</text>
+            <text>{{ price.yoy_change > 0 ? '+' : '' }}{{ price.yoy_change }}%</text>
+          </view>
+        </view>
+        <view class="change-item">
+          <text class="change-label">环比上月</text>
+          <view class="change-tag {{ price.mom_change > 0 ? 'tag-up' : (price.mom_change < 0 ? 'tag-down' : 'tag-flat') }}">
+            <text class="change-arrow">{{ price.mom_change > 0 ? '↑' : (price.mom_change < 0 ? '↓' : '-') }}</text>
+            <text>{{ price.mom_change > 0 ? '+' : '' }}{{ price.mom_change }}%</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 房价走势图 - 卡片容器，圆角阴影 -->
+    <view class="chart-card card" wx:if="{{ price.price_history && price.price_history.length > 0 }}">
+      <view class="section-title">近6个月价格走势</view>
+      <!-- 价格数据列表 -->
+      <view class="price-history-list">
+        <view class="history-item" wx:for="{{ price.price_history }}" wx:key="month">
+          <text class="history-month">{{ item.month }}</text>
+          <view class="history-bar-container">
+            <view class="history-bar" style="width: {{ (item.avg_price / price.current_avg_price) * 100 }}%;"></view>
+          </view>
+          <view class="history-price-wrap">
+            <text class="history-price">{{ item.avg_price }}</text>
+            <text class="history-change {{ item.change > 0 ? 'text-up' : (item.change < 0 ? 'text-down' : '') }}" wx:if="{{ item.change !== undefined }}">
+              {{ item.change > 0 ? '+' : '' }}{{ item.change }}%
+            </text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 周边配套卡片 - 分类展示，彩色图标 -->
+    <view class="facility-card card" wx:if="{{ facilities.metro || facilities.schools || facilities.hospitals || facilities.malls }}">
+      <view class="section-title">周边配套</view>
+
+      <!-- 地铁配套 -->
+      <view class="facility-section" wx:if="{{ facilities.metro && facilities.metro.name }}">
+        <view class="facility-header">
+          <view class="facility-icon-wrap icon-metro">🚇</view>
+          <text class="facility-title">地铁交通</text>
+        </view>
+        <view class="facility-content">
+          <view class="facility-item">
+            <text class="facility-name">{{ facilities.metro.name }}</text>
+            <text class="facility-tag metro-line-tag">{{ facilities.metro.line }}</text>
+            <text class="distance-tag">约{{ facilities.metro.distance }}米</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 学校配套 -->
+      <view class="facility-section" wx:if="{{ facilities.schools && facilities.schools.length > 0 }}">
+        <view class="facility-header">
+          <view class="facility-icon-wrap icon-school">🏫</view>
+          <text class="facility-title">教育资源</text>
+        </view>
+        <view class="facility-content">
+          <view class="facility-item" wx:for="{{ facilities.schools }}" wx:key="index">
+            <text class="facility-name">{{ item.name }}</text>
+            <text class="facility-tag school-type-tag">{{ item.type }}</text>
+            <text class="distance-tag">{{ item.distance }}米</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 医院配套 -->
+      <view class="facility-section" wx:if="{{ facilities.hospitals && facilities.hospitals.length > 0 }}">
+        <view class="facility-header">
+          <view class="facility-icon-wrap icon-hospital">🏥</view>
+          <text class="facility-title">医疗配套</text>
+        </view>
+        <view class="facility-content">
+          <view class="facility-item" wx:for="{{ facilities.hospitals }}" wx:key="index">
+            <text class="facility-name">{{ item.name }}</text>
+            <text class="distance-tag">{{ item.distance }}米</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 商场配套 -->
+      <view class="facility-section" wx:if="{{ facilities.malls && facilities.malls.length > 0 }}">
+        <view class="facility-header">
+          <view class="facility-icon-wrap icon-mall">🛍️</view>
+          <text class="facility-title">商业配套</text>
+        </view>
+        <view class="facility-content">
+          <view class="facility-item" wx:for="{{ facilities.malls }}" wx:key="index">
+            <text class="facility-name">{{ item.name }}</text>
+            <text class="distance-tag">{{ item.distance }}米</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 户型信息 - 标签组形式 -->
+    <view class="layout-card card" wx:if="{{ community.layout_types && community.layout_types.length > 0 }}">
+      <view class="section-title">户型类型</view>
+      <view class="layout-list">
+        <view class="tag tag-primary layout-tag" wx:for="{{ community.layout_types }}" wx:for-item="layout" wx:key="index">{{ layout }}</view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 未找到数据 -->
+  <view class="empty-state" wx:if="{{ !loading && !community.id }}">
+    <text class="empty-text">未找到小区信息</text>
+  </view>
+
+  <!-- 底部操作栏 - 固定在底部，带安全区域适配 -->
+  <view class="bottom-bar safe-area-bottom" wx:if="{{ !loading && community.id }}">
+    <button class="btn btn-primary action-btn" bindtap="onViewMap">
+      <text class="btn-icon">📍</text>
+      <text>查看地图位置</text>
+    </button>
+  </view>
+</view>

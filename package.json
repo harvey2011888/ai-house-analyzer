@@ -1,0 +1,24 @@
+{
+  "name": "ai-house-analyzer",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "crawler": "node scripts/crawler/index.js",
+    "crawler:list": "node scripts/crawler/index.js --list",
+    "crawler:detail": "node scripts/crawler/index.js --detail",
+    "crawler:transaction": "node scripts/crawler/index.js --transaction",
+    "crawler:full": "node scripts/crawler/index.js --full",
+    "crawler:schedule": "node scripts/crawler/schedule.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@vant/weapp": "^1.11.7",
+    "cheerio": "^1.0.0-rc.12",
+    "node-cron": "^3.0.3",
+    "puppeteer": "^21.11.0"
+  }
+}

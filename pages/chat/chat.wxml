@@ -1,0 +1,183 @@
+<!-- AI需求填写页 - 专业版UI -->
+<view class="chat-container">
+  <!-- 顶部状态栏 -->
+  <view class="status-bar" wx:if="{{ !showSummary }}">
+    <view class="status-icon">🏠</view>
+    <view class="status-text">AI 购房助手</view>
+    <view class="status-badge">专业版</view>
+  </view>
+
+  <!-- 进度指示器 -->
+  <view class="progress-section" wx:if="{{ !showSummary }}">
+    <view class="progress-steps">
+      <view class="step-item {{ index < currentStep ? 'completed' : '' }} {{ index === currentStep ? 'active' : '' }}" 
+            wx:for="{{ totalSteps }}" 
+            wx:for-index="index"
+            wx:key="index">
+        <view class="step-dot">
+          <text class="step-number" wx:if="{{ index >= currentStep }}">{{ index + 1 }}</text>
+          <text class="step-check" wx:if="{{ index < currentStep }}">✓</text>
+        </view>
+        <view class="step-line" wx:if="{{ index < totalSteps - 1 }}"></view>
+      </view>
+    </view>
+    <view class="progress-text">问题 {{ currentStep + 1 }} / {{ totalSteps }}</view>
+  </view>
+
+  <!-- 问题卡片 - 每页2个问题 -->
+  <view class="questions-wrapper" wx:if="{{ !showSummary && currentQuestions.length > 0 }}">
+    <view class="question-card" wx:for="{{ currentQuestions }}" wx:for-item="question" wx:key="id">
+      <!-- 问题类型标签 -->
+      <view class="question-type-tag" wx:if="{{ question.type === 'multiSelect' }}">多选</view>
+      
+      <view class="question-header">
+        <view class="question-number">Q{{ currentStep * 2 + index + 1 }}</view>
+        <view class="question-title">{{ question.title }}</view>
+        <view class="question-subtitle" wx:if="{{ question.subtitle }}">{{ question.subtitle }}</view>
+      </view>
+
+      <view class="question-body">
+        <!-- 单值滑块类型 -->
+        <view class="slider-container" wx:if="{{ question.type === 'slider' }}">
+          <view class="slider-display">
+            <view class="slider-value-box">
+              <text class="slider-value">{{ answers[question.id] || question.defaultValue }}</text>
+              <text class="slider-unit">{{ question.unit }}</text>
+            </view>
+          </view>
+          <view class="slider-track-container">
+            <view class="slider-track-bg">
+              <view class="slider-track-fill" style="width: {{ ((answers[question.id] || question.defaultValue) - question.min) / (question.max - question.min) * 100 }}%"></view>
+            </view>
+            <slider
+              class="custom-slider"
+              min="{{ question.min }}"
+              max="{{ question.max }}"
+              step="{{ question.step }}"
+              value="{{ answers[question.id] || question.defaultValue }}"
+              bindchange="onSliderChange"
+              data-question-id="{{ question.id }}"
+              show-value="{{ false }}"
+              block-size="28"
+            />
+          </view>
+          <view class="slider-labels">
+            <text class="slider-label">{{ question.min }}{{ question.unit }}</text>
+            <text class="slider-label">{{ question.max }}{{ question.unit }}</text>
+          </view>
+        </view>
+
+        <!-- 范围滑块类型 -->
+        <view class="range-slider-container" wx:if="{{ question.type === 'rangeSlider' }}">
+          <view class="range-slider-display">
+            <view class="range-slider-value-box">
+              <text class="range-slider-value" wx:if="{{ answers[question.id] }}">{{ answers[question.id][0] }}</text>
+              <text class="range-slider-value" wx:else>{{ question.defaultValue[0] }}</text>
+              <text class="range-slider-unit">{{ question.unit }}</text>
+              <text class="range-slider-separator">~</text>
+              <text class="range-slider-value" wx:if="{{ answers[question.id] }}">{{ answers[question.id][1] }}</text>
+              <text class="range-slider-value" wx:else>{{ question.defaultValue[1] }}</text>
+              <text class="range-slider-unit">{{ question.unit }}</text>
+            </view>
+          </view>
+          
+          <!-- 单轨道双滑块 -->
+          <view class="range-slider-track" 
+                id="range-track-{{ question.id }}"
+                bindtouchstart="onRangeTouchStart" 
+                bindtouchmove="onRangeTouchMove"
+                bindtouchend="onRangeTouchEnd"
+                data-question-id="{{ question.id }}">
+            <!-- 轨道背景 -->
+            <view class="range-track-bg"></view>
+            <!-- 已选区域 -->
+            <view class="range-track-fill" style="left: {{ ((answers[question.id] ? answers[question.id][0] : question.defaultValue[0]) - question.min) / (question.max - question.min) * 100 }}%; right: {{ 100 - ((answers[question.id] ? answers[question.id][1] : question.defaultValue[1]) - question.min) / (question.max - question.min) * 100 }}%"></view>
+            <!-- 最小值滑块 -->
+            <view class="range-thumb range-thumb-min" style="left: {{ ((answers[question.id] ? answers[question.id][0] : question.defaultValue[0]) - question.min) / (question.max - question.min) * 100 }}%">
+              <view class="range-thumb-inner"></view>
+            </view>
+            <!-- 最大值滑块 -->
+            <view class="range-thumb range-thumb-max" style="left: {{ ((answers[question.id] ? answers[question.id][1] : question.defaultValue[1]) - question.min) / (question.max - question.min) * 100 }}%">
+              <view class="range-thumb-inner"></view>
+            </view>
+          </view>
+          
+          <view class="range-slider-labels">
+            <text class="range-slider-label">{{ question.min }}{{ question.unit }}</text>
+            <text class="range-slider-label">{{ question.max }}{{ question.unit }}</text>
+          </view>
+        </view>
+
+        <!-- 多选类型 -->
+        <view class="options-container" wx:if="{{ question.type === 'multiSelect' }}">
+          <view class="option-grid">
+            <view 
+              class="option-card {{ item.selected ? 'selected' : '' }}"
+              wx:for="{{ question.options }}"
+              wx:for-item="item"
+              wx:for-index="optIndex"
+              wx:key="value"
+              bindtap="onMultiSelect"
+              data-question-id="{{ question.id }}"
+              data-value="{{ item.value }}"
+            >
+              <view class="option-icon" wx:if="{{ item.selected }}">✓</view>
+              <view class="option-icon option-icon-empty" wx:if="{{ !item.selected }}"></view>
+              <text class="option-text">{{ item.value }}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 导航按钮 -->
+  <view class="nav-section" wx:if="{{ !showSummary }}">
+    <button 
+      class="nav-btn nav-btn-prev {{ currentStep === 0 ? 'disabled' : '' }}"
+      bindtap="onPrev"
+      disabled="{{ currentStep === 0 }}"
+    >
+      <text class="nav-btn-icon">‹</text>
+      <text>上一步</text>
+    </button>
+    <button class="nav-btn nav-btn-next" bindtap="onNext">
+      <text>{{ currentStep === totalSteps - 1 ? '完成' : '下一步'}}</text>
+      <text class="nav-btn-icon" wx:if="{{ currentStep !== totalSteps - 1 }}">›</text>
+    </button>
+  </view>
+
+  <!-- 需求汇总 -->
+  <view class="summary-wrapper" wx:if="{{ showSummary }}">
+    <view class="summary-header">
+      <view class="summary-avatar">🎯</view>
+      <view class="summary-title">需求确认</view>
+      <view class="summary-desc">请核对您的购房需求，AI将为您精准匹配</view>
+    </view>
+    
+    <view class="summary-grid">
+      <view class="summary-item" wx:for="{{ summaryList }}" wx:key="id">
+        <view class="summary-item-icon">{{ item.icon || '•' }}</view>
+        <view class="summary-item-content">
+          <view class="summary-item-label">{{ item.label }}</view>
+          <view class="summary-item-value">{{ item.value }}</view>
+        </view>
+        <view class="summary-item-action" bindtap="onEditAnswer" data-index="{{ index }}">
+          <text class="edit-link">修改</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="summary-footer">
+      <button class="submit-btn" bindtap="onSubmit">
+        <view class="submit-btn-content">
+          <text class="submit-btn-icon">🚀</text>
+          <view class="submit-btn-text">
+            <text class="submit-main-text">开始AI推荐</text>
+            <text class="submit-sub-text">智能匹配最适合您的房源</text>
+          </view>
+        </view>
+      </button>
+    </view>
+  </view>
+</view>
